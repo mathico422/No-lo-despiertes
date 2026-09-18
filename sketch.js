@@ -130,7 +130,18 @@ function obtenerReferenciasDOM() {
 function configurarEventosUI() {
   if (eventosConfigurados) return;
 
-  if (dom.btnComenzar) dom.btnComenzar.addEventListener('click', iniciarExperiencia);
+  if (dom.btnComenzar) {
+    dom.btnComenzar.addEventListener('click', iniciarExperiencia);
+
+    // En iPhone, p5.js captura los eventos táctiles globales del juego y puede
+    // impedir que Safari genere el evento click. Escuchamos touchend directamente
+    // en el botón para que el inicio siempre responda al toque del usuario.
+    dom.btnComenzar.addEventListener('touchend', (evento) => {
+      evento.preventDefault();
+      evento.stopPropagation();
+      iniciarExperiencia();
+    }, { passive: false });
+  }
   if (dom.btnReiniciar) dom.btnReiniciar.addEventListener('click', reiniciarExperiencia);
 
   eventosConfigurados = Boolean(dom.btnComenzar && dom.btnReiniciar);
@@ -1983,7 +1994,14 @@ function mouseReleased() {
   return false;
 }
 
-function touchStarted() {
+function toqueSobreInterfaz(evento) {
+  const objetivo = evento && evento.target;
+  return Boolean(objetivo && objetivo.closest && objetivo.closest('button, .modal-overlay, .hud-container'));
+}
+
+function touchStarted(evento) {
+  if (toqueSobreInterfaz(evento)) return true;
+
   if (touches && touches.length > 0) {
     if (gestorObjetos && gestorObjetos.intentarAgarrar(touches[0].x, touches[0].y)) {
       return false;
@@ -1993,14 +2011,18 @@ function touchStarted() {
   return false;
 }
 
-function touchMoved() {
+function touchMoved(evento) {
+  if (toqueSobreInterfaz(evento)) return true;
+
   if (gestorObjetos && touches && touches.length > 0) {
     gestorObjetos.arrastrar(touches[0].x, touches[0].y);
   }
   return false;
 }
 
-function touchEnded() {
+function touchEnded(evento) {
+  if (toqueSobreInterfaz(evento)) return true;
+
   if (gestorObjetos) gestorObjetos.soltar();
   return false;
 }
