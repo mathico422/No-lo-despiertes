@@ -1,0 +1,16 @@
+MEMORIA DESCRIPTIVA
+
+Obra: No lo despiertes
+Autor: Mathias Caroni Rossi
+Concepto investigado: Sistema de partículas
+Entrada de hardware: Micrófono con p5.sound
+
+Para este proyecto hice “No lo despiertes”, una experiencia interactiva inspirada en Bruce Banner y su transformación en Hulk. La idea es que el jugador encuentre al personaje durmiendo en un laboratorio y pueda decidir si intenta mantenerlo tranquilo o hacerlo enojar.
+
+La interacción principal funciona mediante el micrófono. El juego analiza el volumen del ambiente y, cuando detecta sonidos que superan cierto nivel, aumenta la ira del personaje. Si el usuario permanece en silencio, la ira empieza a bajar lentamente. Antes de comenzar se realiza una pequeña calibración para adaptar el juego al ruido del lugar.
+
+También agregué una mesa con distintos objetos que se pueden agarrar y lanzar utilizando el mouse. La alarma, el café, la probeta gamma y la pesa aumentan la ira cuando golpean al personaje. Las Weed Candies producen el efecto contrario y sirven para calmarlo.
+
+Como concepto investigado trabajé con un sistema de partículas. Este genera polvo, letras de sueño, humo gamma, chispas, pedazos de ropa y fragmentos de vidrio. Cada partícula tiene su propio movimiento, velocidad, gravedad y tiempo de duración, por lo que el resultado cambia en cada partida.
+
+A medida que aumenta la ira, el personaje cambia de color, tamaño y expresión. Cuando llega al 100%, se transforma completamente y golpea la pantalla, generando grietas y fragmentos. De esta manera, cada experiencia depende tanto del sonido del ambiente como de las decisiones del jugador.

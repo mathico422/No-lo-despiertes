@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="No lo despiertes - Obra interactiva de arte generativo con p5.js, p5.sound y reconocimiento de audio en tiempo real.">
+  <title>No lo despiertes | Arte Generativo Interactivo</title>
+  
+  <!-- Tipografía moderna Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Estilos de la aplicación -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- p5.js se carga al abrir la página. p5.sound se carga después del clic
+       inicial para evitar que algunos navegadores bloqueen el arranque del canvas. -->
+  <script src="vendor/p5.min.js"></script>
+</head>
+<body>
+
+  <!-- Contenedor del Canvas de p5.js -->
+  <main id="canvas-container"></main>
+
+  <!-- Pantalla de Bienvenida e Inicio de Experiencia -->
+  <section id="modal-inicio" class="modal-overlay">
+    <div class="modal-card">
+      <div class="radiation-badge">
+        <span class="radiation-icon">☢</span> ALERTA BIOMÉTRICA
+      </div>
+      
+      <h1 class="modal-title">NO LO DESPIERTES</h1>
+      <p class="modal-subtitle">Obra de Arte Generativo Interactivo</p>
+      
+      <div class="modal-instructions">
+        <div class="instruction-item">
+          <span class="icon">🎙️</span>
+          <p><strong>El sonido del micrófono</strong> y los <strong>clics sobre el sujeto</strong> aumentarán progresivamente su ritmo cardíaco y nivel de ira.</p>
+        </div>
+        <div class="instruction-item">
+          <span class="icon">🤫</span>
+          <p>Mantén el entorno en silencio para permitir que descanse. Un nivel extremo de estrés desencadenará una transformación gamma irreversible.</p>
+        </div>
+        <div class="instruction-item">
+          <span class="icon">🖱️</span>
+          <p><strong>Agarrá y lanzá los objetos de la mesa</strong> sobre Bruce para provocarlo. Las <strong>Weed Candies</strong> tienen el efecto contrario y reducen su ira.</p>
+        </div>
+      </div>
+
+      <!-- Aviso de Privacidad del Micrófono (Requisitos 4 y 5) -->
+      <div class="privacy-notice">
+        <span class="privacy-icon">🔒</span>
+        <p><strong>Aviso de Privacidad:</strong> Esta obra requiere acceso al micrófono para analizar la intensidad del volumen en tiempo real. <em>No se graba, almacena ni transmite ningún tipo de audio.</em></p>
+      </div>
+
+      <button id="btn-comenzar" class="btn-primary" type="button">
+        <span class="btn-glow"></span>
+        <span class="btn-text">Comenzar experiencia</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- HUD e Indicadores Superiores (Integrados a la estética) -->
+  <header id="hud-overlay" class="hud-container hidden">
+    <!-- Monitor Biométrico de Ira -->
+    <div class="hud-card hud-biometrics">
+      <div class="hud-label">ESTADO BIO-GAMMA</div>
+      <div class="hud-meter-container">
+        <div id="hud-meter-fill" class="hud-meter-bar"></div>
+        <div class="hud-meter-glow"></div>
+      </div>
+      <div class="hud-readout">
+        <span id="hud-ira-text">IRA: 0%</span>
+        <span id="hud-status-badge" class="badge-calm">DORMIDO</span>
+      </div>
+    </div>
+
+    <!-- Monitor de Entrada de Audio / Micrófono -->
+    <div class="hud-card hud-audio">
+      <div class="hud-audio-header">
+        <div id="mic-status-dot" class="status-dot calibrating"></div>
+        <span id="mic-status-text" class="hud-label">CALIBRANDO ENTORNO...</span>
+      </div>
+      <div class="hud-audio-meter">
+        <div id="hud-audio-level" class="audio-level-bar"></div>
+        <div id="hud-audio-threshold" class="audio-threshold-line" title="Umbral de Ruido Ambiente"></div>
+      </div>
+      <div class="hud-audio-info">
+        <span id="audio-db-readout">Nivel: 0.0</span>
+        <span id="audio-note">Calibrando 2s</span>
+      </div>
+    </div>
+
+    <!-- Botón / Atajo de Reinicio -->
+    <div class="hud-card hud-controls">
+      <button id="btn-reiniciar" class="btn-hud" type="button" title="Reiniciar experiencia (Tecla R)">
+        <span>↺ REINICIAR</span>
+        <kbd>R</kbd>
+      </button>
+    </div>
+  </header>
+
+  <!-- Notificación de Alerta / Fallback (si se deniega el micrófono) -->
+  <aside id="audio-fallback-alert" class="alert-box hidden">
+    <span class="alert-icon">⚠️</span>
+    <div class="alert-content">
+      <strong>Micrófono no disponible:</strong>
+      <span>Puedes interactuar haciendo clic sobre el personaje para aumentar su ira.</span>
+    </div>
+  </aside>
+
+  <!-- Script principal con p5.js -->
+  <script src="sketch.js"></script>
+</body>
+</html>
