@@ -613,3 +613,182 @@ canvas:active {
   }
   
 }
+
+/* HUD compacto para teléfonos en vertical */
+@media (max-width: 600px) {
+  .hud-container {
+    top: 0;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .hud-card {
+    min-width: 0;
+    padding: 6px 8px;
+    border-radius: 7px;
+  }
+
+  .hud-biometrics,
+  .hud-audio {
+    min-width: 0;
+  }
+
+  .hud-label {
+    margin-bottom: 3px;
+    font-size: 0.5rem;
+    letter-spacing: 0.7px;
+    white-space: nowrap;
+  }
+
+  .hud-meter-container {
+    height: 7px;
+    margin-bottom: 3px;
+  }
+
+  .hud-readout {
+    gap: 4px;
+    font-size: 0.62rem;
+  }
+
+  #hud-status-badge {
+    padding: 1px 4px;
+    font-size: 0.46rem;
+    letter-spacing: 0.4px;
+  }
+
+  .hud-audio-header {
+    gap: 4px;
+    margin-bottom: 3px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    flex: 0 0 6px;
+  }
+
+  .hud-audio-meter {
+    height: 6px;
+    margin-bottom: 3px;
+  }
+
+  .hud-audio-info {
+    gap: 4px;
+    font-size: 0.52rem;
+    white-space: nowrap;
+  }
+
+  .hud-controls {
+    position: absolute;
+    top: 61px;
+    right: 6px;
+    width: auto;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .btn-hud {
+    gap: 4px;
+    padding: 5px 8px;
+    font-size: 0.58rem;
+    letter-spacing: 0.5px;
+    background: rgba(10, 15, 22, 0.9);
+  }
+
+  .btn-hud kbd {
+    display: none;
+  }
+
+  .alert-box {
+    bottom: max(8px, env(safe-area-inset-bottom));
+    width: calc(100% - 16px);
+    padding: 9px 11px;
+    gap: 8px;
+  }
+
+  .alert-content {
+    font-size: 0.78rem;
+  }
+}
+
+/* Teléfonos angostos */
+@media (max-width: 380px) {
+  .hud-container {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .hud-card {
+    padding: 5px 6px;
+  }
+
+  .hud-label {
+    font-size: 0.45rem;
+    letter-spacing: 0.35px;
+  }
+
+  .hud-audio-info span:last-child {
+    display: none;
+  }
+
+  .hud-controls {
+    top: 56px;
+    right: 4px;
+  }
+}
+
+/* Teléfonos y tablets en horizontal */
+@media (orientation: landscape) and (max-height: 600px) {
+  .hud-container {
+    top: 0;
+    display: grid !important;
+    grid-template-columns: minmax(180px, 1fr) minmax(180px, 1fr) auto;
+    align-items: start;
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .hud-card {
+    min-width: 0;
+    padding: 5px 8px;
+  }
+
+  .hud-label {
+    margin-bottom: 2px;
+    font-size: 0.48rem;
+  }
+
+  .hud-meter-container,
+  .hud-audio-meter {
+    height: 6px;
+    margin-bottom: 2px;
+  }
+
+  .hud-readout,
+  .hud-audio-info {
+    font-size: 0.55rem;
+  }
+
+  .hud-controls {
+    position: static;
+    width: auto;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .btn-hud {
+    padding: 7px 9px;
+    font-size: 0.58rem;
+  }
+
+  .btn-hud kbd {
+    display: none;
+  }
+}
